@@ -1,0 +1,32 @@
+To Run:
+you need sbt :http://www.scala-sbt.org
+
+from the root folder
+
+sbt compile - compiles the source
+sbt test - runs the tests
+sbt "project fybertimeseries" "run data_scala.txt"
+
+Design:
+
+We use a queue as the data structure to hold a given window.
+
+When receive an update, we push into the queue, and pop off the old values, then propagate the latest window to the stat then printing routines
+
+All this is done from the iteration across the file, so it should be fairly lean in terms of memory use
+
+Issues:
+
+I'm fairly sure there is a slick infix way to do this, but my scala skills aren't confident enough to attempt it and I have a 'javaish' style
+It's apparent  to me that they all call each other with more or less a single function.
+
+The doubles are being outputted as 1.60530 instead of 1.6053.
+I'm not sure how important this detail is, but if you are testing with string comparison utilities then it might be as it puts the alignments off occasionally.
+
+The column output alignments are also disturbed by rolling sums >= 10.
+
+
+
+
+
+
